@@ -1,0 +1,44 @@
+# Build directories
+build/
+cmake-build-*/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# ESP-IDF generated files
+sdkconfig
+sdkconfig.old
+managed_components/
+
+# PlatformIO
+.pio/
+
+# Compiled binaries
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.a
+
+# Logs and simulation recordings
+*.log
+recordings/
+simulation_runs/
+
+# IDE settings
+.vscode/
+
+# Operating system files
+.DS_Store
+
+# Secrets
+.env
+.env.*
+!.env.example
