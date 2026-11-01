@@ -13,7 +13,8 @@ pkg_check_modules(GZ_MSGS REQUIRED
     IMPORTED_TARGET gz-msgs10)
 
 add_executable(imu_reader
-    src/main.cpp)
+    src/main.cpp
+    src/imu_callback.cpp)
 
 target_link_libraries(imu_reader 
     PRIVATE
