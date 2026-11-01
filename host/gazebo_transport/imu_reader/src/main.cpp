@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include <gz/transport/Node.hh>
-#include <gz/msgs/imu.pb.h>
 
 #include <chrono>
 #include <thread>
