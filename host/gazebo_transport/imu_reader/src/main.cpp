@@ -13,7 +13,7 @@ int main() {
     gz::transport::Node node;
 
     if (!node.Subscribe("/X3/imu", onImu)){
-        std::cerr << "Failed to connect to /X3/imu\n.";
+        std::cerr << "Failed to subscribe to /X3/imu\n";
         return 1;
     }
 
