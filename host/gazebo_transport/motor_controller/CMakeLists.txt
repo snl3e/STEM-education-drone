@@ -15,7 +15,8 @@ pkg_check_modules(GZ_MSGS REQUIRED
     IMPORTED_TARGET gz-msgs10)
 
 add_executable(motor_controller
-    src/main.cpp)
+    src/main.cpp
+    src/motor_controller_callback.cpp)
 
 target_link_libraries(motor_controller
     PRIVATE
