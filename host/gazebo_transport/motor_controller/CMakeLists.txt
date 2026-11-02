@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(imu_reader LANGUAGES CXX)
+project(motor_controller LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,8 +15,7 @@ pkg_check_modules(GZ_MSGS REQUIRED
     IMPORTED_TARGET gz-msgs10)
 
 add_executable(motor_controller
-    src/main.cpp
-    src/motor_controller_callback.cpp)
+    src/main.cpp)
 
 target_link_libraries(motor_controller
     PRIVATE
