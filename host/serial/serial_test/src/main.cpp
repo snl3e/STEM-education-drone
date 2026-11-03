@@ -41,5 +41,15 @@ int main(){
         return 1;
     }
 
-    
+    //---Send data to ESP32---
+    const char message[] = "HELLO\n";
+    ssize_t byteWritten = write(fileDescriptor, message, sizeof(message) - 1);
+
+    char buffer[128];
+    ssize_t byteRead = read(fileDescriptor, buffer, sizeof(buffer) - 1);
+    if (byteRead > 0) {
+        std::cout << "Message received: " << buffer;
+        close(fileDescriptor);
+    }
+    return 0;
 }
