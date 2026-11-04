@@ -11,10 +11,13 @@ class SerialPort {
         SerialPort(const std::string &devicePath, int baudRate);
         ~SerialPort();
 
-        bool open();
-        bool close();
-
         //Disable Copying
         SerialPort::SerialPort(const SerialPort&) = delete;
         SerialPort& operator=(const SerialPort&) = delete;
+        
+        bool open();
+        bool close();
+        bool configure();
+
+        
     };
