@@ -10,7 +10,8 @@ add_executable(serial_interface
     src/main.cpp
     src/serial_port.cpp)
 
-
-
+target_include_directories(serial_interface PRIVATE
+    ../serial_interface/include
+)
     
 

@@ -12,9 +12,9 @@ class SerialPort {
         ~SerialPort();
 
         //Disable Copying
-        SerialPort::SerialPort(const SerialPort&) = delete;
+        SerialPort(const SerialPort&) = delete;
         SerialPort& operator=(const SerialPort&) = delete;
-        
+
         bool open();
         bool close();
         bool configure();
