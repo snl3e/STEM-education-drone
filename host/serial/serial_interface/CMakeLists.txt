@@ -8,7 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
     
 add_executable(serial_interface
     src/main.cpp
-    src/serial_port)
+    src/serial_port.cpp)
 
 
 
