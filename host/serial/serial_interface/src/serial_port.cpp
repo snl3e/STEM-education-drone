@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <iostream>
-#include "../include/serial_port.hpp"
+#include "serial_port.hpp"
 
 
 SerialPort::SerialPort(const std::string &devicePath, int baudRate)
@@ -73,5 +73,35 @@ bool SerialPort::configure(){
         return false;
     }
 
+    return true;
+}
+
+bool SerialPort::write(const std::string &message){
+    if(fileDescriptor == -1) {
+        std::cerr << "Serial port do not exist.\n";
+        return false;
+    }
+
+    size_t totalWritten{0};
+    
+    while (totalWritten < message.size())
+    {
+        const char* remainingMessage = message.c_str() + totalWritten;
+        size_t remaining = message.size() - totalWritten;
+
+        ssize_t bytesWritten = ::write(fileDescriptor, remainingMessage, remaining);
+
+        if (bytesWritten == -1) {
+            std::cerr << "Failed to send message to " << devicePath << '\n';
+            return false;
+        }
+        totalWritten += bytesWritten;
+
+        if (bytesWritten == 0) {
+            std::cerr << "No bytes were written to " << devicePath << '\n';
+            return false;
+        }
+    }
+    
     return true;
 }

@@ -18,6 +18,6 @@ class SerialPort {
         bool open();
         bool close();
         bool configure();
-
+        bool write(const std::string &message);
         
     };
