@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <termios.h>
+#include <cerrno>
 #include <iostream>
 #include "serial_port.hpp"
 
@@ -95,13 +96,56 @@ bool SerialPort::write(const std::string &message){
             std::cerr << "Failed to send message to " << devicePath << '\n';
             return false;
         }
-        totalWritten += bytesWritten;
 
         if (bytesWritten == 0) {
             std::cerr << "No bytes were written to " << devicePath << '\n';
             return false;
         }
+
+        totalWritten += bytesWritten;
     }
     
+    return true;
+}
+
+bool SerialPort::read(std::string &message){
+    if (fileDescriptor == -1) {
+        std::cerr << "Serial port do not exist.\n";
+        return false;
+    }
+
+    constexpr size_t MAX_MESSAGE_LENGTH = 127;
+
+    message.clear();
+    while (true) {
+        char receivedByte;
+        ssize_t result = ::read(fileDescriptor, &receivedByte, 1);
+
+        if (result == -1 && errno == EINTR) {
+            continue;
+        }
+        
+        if (result == -1) {
+            std::cerr << "Failed to read message from " << devicePath << '\n';
+            return false;
+        }
+
+        if (result == 0) {
+            std::cerr << "No data received from " << devicePath << '\n';
+            return false;
+        }
+
+        if (receivedByte == '\n') break;
+
+        if (message.size() == MAX_MESSAGE_LENGTH) {
+            std::cerr << "Message exceed max length (127 bytes).\n";
+            return false;
+        }
+
+        
+
+        message += receivedByte;
+    }
+
     return true;
 }
