@@ -20,5 +20,5 @@ class SerialPort {
         bool configure();
 
         bool write(const std::string &message);
-        bool read(std::string &message);
+        bool read(std::string &message, int timeoutMs);
     };
